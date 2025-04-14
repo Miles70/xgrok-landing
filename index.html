@@ -2,147 +2,129 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>XGROK - Official Token Info</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XGROK - Presale Bonus</title>
   <style>
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #0d0d0d;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
+      background: radial-gradient(circle at top, #0f0f0f, #000000);
+      color: white;
+      overflow-x: hidden;
     }
-    .container {
-      max-width: 600px;
-      width: 100%;
+    .hero {
       text-align: center;
+      padding: 80px 20px;
+      background: url('https://images.unsplash.com/photo-1623053518183-9fd4b7cbf36a?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
     }
-    .logo {
-      width: 128px;
-      height: 128px;
-      border-radius: 50%;
-      border: 2px solid #fff;
-      margin-bottom: 20px;
+    .hero h1 {
+      font-size: 3rem;
+      text-shadow: 0 0 15px #0ff;
     }
-    h1 {
-      font-size: 2.5rem;
+    .hero p {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      text-shadow: 0 0 10px #0ff;
+    }
+    .buy-section {
+      text-align: center;
+      padding: 40px 20px;
+      background: #111;
+    }
+    .buy-section h2 {
+      font-size: 2rem;
       margin-bottom: 10px;
     }
-    p {
-      font-size: 1.1rem;
-      line-height: 1.6;
+    .buy-section input {
+      padding: 10px;
+      width: 200px;
       margin-bottom: 10px;
+      font-size: 1rem;
     }
-    code {
-      word-break: break-word;
-      background-color: #1a1a1a;
-      padding: 5px 8px;
-      border-radius: 6px;
-      display: inline-block;
-      margin-top: 5px;
-    }
-    .metamask-button {
-      background-color: #ff9900;
-      color: #000;
+    .buy-section button {
       padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      margin: 20px auto;
+      font-size: 1rem;
+      margin: 10px;
       cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background: #00f5d4;
+      color: black;
+      transition: 0.3s;
     }
-    .social-buttons {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-    .social-button {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background-color: #1a1a1a;
-      color: #00ffcc;
-      border: 2px solid #00ffcc;
-      padding: 10px 18px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    .social-button:hover {
-      background-color: #00ffcc;
-      color: #000;
-    }
-    .social-icon {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
+    .buy-section button:hover {
+      background: #00d1b2;
     }
     .footer {
-      margin-top: 40px;
-      font-size: 0.85rem;
-      opacity: 0.5;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      background: #000;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img class="logo" src="https://miles70.github.io/xgrok-landing/xgrok-logo.png" alt="XGROK Logo"/>
-    <h1>$XGROK</h1>
-    <p><strong>Blockchain:</strong> Binance Smart Chain (BSC)</p>
-    <p><strong>Total Supply:</strong> 500,000,000,000,000</p>
-    <p><strong>Contract Address:</strong><br>
-      <code>0x19B86B4E6e0bBF652a2896014DB437c484dC9a9B</code>
-    </p>
+  <div class="hero">
+    <h1>XGROK Presale Bonus</h1>
+    <p>Early Access - Massive Gains</p>
+  </div>
 
-    <button class="metamask-button" onclick="addToken()">Add $XGROK to MetaMask</button>
+  <div class="buy-section">
+    <h2>Presale Bonus Purchase</h2>
+    <p>Phase 1 Presale Coming Very Soon!</p>
+    <input id="amount" type="number" placeholder="Enter amount" /> <br />
+    <button onclick="buyWithUSDT()">Buy with USDT</button>
+    <button onclick="buyWithBNB()">Buy with BNB</button>
+    <p id="status"></p>
+  </div>
 
-    <div class="social-buttons">
-      <a href="https://t.me/XGROKKK" class="social-button" target="_blank">
-        <svg class="social-icon" viewBox="0 0 240 240"><path d="M120,0C53.7,0,0,53.7,0,120s53.7,120,120,120s120-53.7,120-120S186.3,0,120,0z M175.5,84.8l-20.5,96.7 c-1.5,6.8-5.5,8.5-11.1,5.3l-30.7-22.6l-14.8,14.3c-1.6,1.6-2.9,2.9-6,2.9l2.1-29.4l53.6-48.4c2.3-2.1-0.5-3.3-3.5-1.2L83.5,135.5 l-28.3-8.8c-6.1-1.9-6.2-6.1,1.3-9.1l111-42.9C172.1,73.2,177.1,76.6,175.5,84.8z"/></svg>
-        Telegram
-      </a>
-      <a href="https://x.com/XGrokkk" class="social-button" target="_blank">
-        <svg class="social-icon" viewBox="0 0 24 24"><path d="M22.162 0H1.838A1.839 1.839 0 000 1.838v20.324A1.839 1.839 0 001.838 24h20.324A1.839 1.839 0 0024 22.162V1.838A1.839 1.839 0 0022.162 0zM16.884 20.21l-4.407-6.03-4.726 6.03H4.8l6.683-8.367L5.123 3.79h4.313l4.05 5.537 4.34-5.537h3.951l-6.28 7.935 6.688 8.482h-4.301z"/></svg>
-        X
-      </a>
-    </div>
-
-    <div class="footer">
-      <p>&copy; 2025 XGROK Token - All rights reserved</p>
-    </div>
+  <div class="footer">
+    XGROK Token Address:<br />
+    0x19B86B4E6e0bBF652a2896014DB437c484dC9a9B<br />
+    Total Supply: 500,000,000,000,000 XGROK
   </div>
 
   <script>
-    async function addToken() {
-      try {
-        const wasAdded = await window.ethereum.request({
-          method: 'wallet_watchAsset',
-          params: {
-            type: 'ERC20',
-            options: {
-              address: '0x19B86B4E6e0bBF652a2896014DB437c484dC9a9B',
-              symbol: 'XGROK',
-              decimals: 18,
-              image: 'https://miles70.github.io/xgrok-landing/xgrok-logo.png'
-            },
-          },
-        });
-
-        if (wasAdded) {
-          alert('$XGROK token added to MetaMask!');
-        } else {
-          alert('Token eklenmedi.');
+    async function connectWallet() {
+      if (typeof window.ethereum !== 'undefined') {
+        try {
+          await ethereum.request({ method: 'eth_requestAccounts' });
+          return new ethers.providers.Web3Provider(window.ethereum);
+        } catch (err) {
+          document.getElementById('status').innerText = 'Wallet connection rejected.';
         }
-      } catch (error) {
-        console.error(error);
-        alert('MetaMask ile bağlantı kurulamadı.');
+      } else {
+        document.getElementById('status').innerText = 'Please install MetaMask.';
       }
+    }
+
+    const CONTRACT_ADDRESS = "0x19B86B4E6e0bBF652a2896014DB437c484dC9a9B";
+    const BONUS_PERCENT = 10;
+
+    async function buyWithUSDT() {
+      const provider = await connectWallet();
+      if (!provider) return;
+      const signer = provider.getSigner();
+      const amount = document.getElementById("amount").value;
+      document.getElementById("status").innerText = "Processing USDT payment...";
+      
+      // Placeholder: USDT contract interaction logic goes here
+      // Simulate bonus logic
+      const totalWithBonus = amount * (1 + BONUS_PERCENT / 100);
+      document.getElementById("status").innerText = `Success! You will receive ${totalWithBonus} XGROK (incl. bonus)`;
+    }
+
+    async function buyWithBNB() {
+      const provider = await connectWallet();
+      if (!provider) return;
+      const signer = provider.getSigner();
+      const amount = document.getElementById("amount").value;
+      document.getElementById("status").innerText = "Processing BNB payment...";
+
+      // Placeholder: Send BNB to contract and receive XGROK + bonus
+      const totalWithBonus = amount * (1 + BONUS_PERCENT / 100);
+      document.getElementById("status").innerText = `Success! You will receive ${totalWithBonus} XGROK (incl. bonus)`;
     }
   </script>
 </body>
