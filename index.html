@@ -37,25 +37,12 @@
       margin-bottom: 10px;
     }
     code {
-      word-break: break-all;
+      word-break: break-word;
       background-color: #1a1a1a;
       padding: 5px 8px;
       border-radius: 6px;
       display: inline-block;
       margin-top: 5px;
-    }
-    a {
-      color: #00ffcc;
-      text-decoration: none;
-    }
-    .socials a {
-      margin: 0 10px;
-      font-weight: bold;
-    }
-    .footer {
-      margin-top: 40px;
-      font-size: 0.85rem;
-      opacity: 0.5;
     }
     .metamask-button {
       background-color: #ff9900;
@@ -64,25 +51,52 @@
       border: none;
       border-radius: 8px;
       font-weight: bold;
-      margin-top: 20px;
+      margin: 20px auto;
       cursor: pointer;
+    }
+    .social-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .social-button {
+      background-color: #1a1a1a;
+      color: #00ffcc;
+      border: 2px solid #00ffcc;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .social-button:hover {
+      background-color: #00ffcc;
+      color: #000;
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 0.85rem;
+      opacity: 0.5;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img class="logo" src="https://miles70.github.io/xgrok-landing/xgrok-logo.png" alt="XGROK Logo"/>
+    <img class="logo" src="https://miles70.github.io/xgrok-landing/Xgrok-logo.png" alt="XGROK Logo"/>
     <h1>$XGROK</h1>
     <p><strong>Blockchain:</strong> Binance Smart Chain (BSC)</p>
     <p><strong>Total Supply:</strong> 500,000,000,000,000</p>
-    <p><strong>Contract Address:</strong><br><code>0x19B86B4E6e0bBF652a2896014DB437c484dC9a9B</code></p>
+    <p><strong>Contract Address:</strong><br>
+      <code>0x19B86B4E6e0bBF652a2896014DB437c484dC9a9B</code>
+    </p>
 
     <button class="metamask-button" onclick="addToken()">Add $XGROK to MetaMask</button>
-    
-    <div class="socials">
-      <p><strong>Join the Community:</strong></p>
-      <a href="https://t.me/https://t.me/XGROKKK" target="_blank">Telegram</a> |
-      <a href="https://twitter.com/XGROKKK" target="_blank">Twitter</a>
+
+    <div class="social-buttons">
+      <a href="https://t.me/XGROKKK" class="social-button" target="_blank">📢 Telegram</a>
+      <a href="https://twitter.com/XGROKOfficial" class="social-button" target="_blank">🐦 Twitter</a>
     </div>
 
     <div class="footer">
@@ -101,7 +115,7 @@
               address: '0x19B86B4E6e0bBF652a2896014DB437c484dC9a9B',
               symbol: 'XGROK',
               decimals: 18,
-              image: 'https://miles70.github.io/xgrok-landing/xgrok-logo.png'
+              image: 'https://miles70.github.io/xgrok-landing/Xgrok-logo.png'
             },
           },
         });
