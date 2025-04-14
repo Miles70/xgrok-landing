@@ -11,7 +11,7 @@
       margin: 0;
       padding: 0;
       background: black;
-      overflow: hidden;
+      overflow-x: hidden;
       color: white;
     }
 
@@ -67,10 +67,9 @@
       100% { text-shadow: 0 0 5px #facc15, 0 0 10px #facc15; opacity: 0.7; }
     }
 
-    .xgrok-text {
+    .xgrok-text, .xgrok-text-right {
       position: absolute;
       top: 140px;
-      left: 30px;
       font-size: 0.75rem;
       color: #facc15;
       opacity: 0.9;
@@ -78,15 +77,12 @@
       animation: glowText 2.5s infinite ease-in-out;
     }
 
+    .xgrok-text {
+      left: 30px;
+    }
+
     .xgrok-text-right {
-      position: absolute;
-      top: 140px;
       right: 30px;
-      font-size: 0.75rem;
-      color: #facc15;
-      opacity: 0.9;
-      z-index: 1;
-      animation: glowText 2.5s infinite ease-in-out;
     }
 
     .contract-address {
@@ -106,6 +102,13 @@
       text-align: center;
       font-size: 0.875rem;
       color: #22c55e;
+    }
+
+    .info-text {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: #d1d5db;
+      text-align: center;
     }
   </style>
 </head>
@@ -150,11 +153,43 @@
         <span id="contractCopy" class="cursor-pointer underline hover:text-white">0x19B86B4E6e0bBF652a2896014DB437c484dC9a9B</span>
         <div id="copyNotice" class="text-xs text-green-400 mt-1 hidden">Copied!</div>
       </div>
+
+      <div class="info-text">
+        Minimum: $10<br />Maximum: $10,000<br />Hardcap: $500,000<br />Listing on PancakeSwap<br />Presale ends on: <span class="text-yellow-400 font-semibold">May 1st, 2025</span>
+      </div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/gh/miles70/xgrok-landing/xgrok-payment-module.js"></script>
+  <!-- Tokenomics Section -->
+  <div class="max-w-3xl mx-auto mt-16 p-6 bg-black bg-opacity-80 rounded-xl gold-border">
+    <h2 class="text-2xl text-yellow-400 font-bold mb-4 text-center">Tokenomics</h2>
+    <ul class="text-white space-y-2">
+      <li>Total Supply: 500,000,000,000,000 XGROK</li>
+      <li>Presale Allocation: 30%</li>
+      <li>Liquidity: 25%</li>
+      <li>Team: 15%</li>
+      <li>Marketing: 20%</li>
+      <li>Community & Airdrops: 10%</li>
+    </ul>
+  </div>
+
+  <!-- Roadmap Section -->
+  <div class="max-w-3xl mx-auto mt-10 p-6 bg-black bg-opacity-80 rounded-xl gold-border mb-16">
+    <h2 class="text-2xl text-yellow-400 font-bold mb-4 text-center">Roadmap</h2>
+    <ol class="text-white list-decimal ml-5 space-y-2">
+      <li>Q2 2025: Web site launch</li>
+      <li>Q2 2025: Launch Presale + Marketing Campaign</li>
+      <li>Q3 2025: PancakeSwap Listing + CMC/CG Submission</li>
+      <li>Q4 2025: NFT Marketplace Integration</li>
+      <li>Q1 2026: DAO Governance Launch</li>
+      <li>Q2 2026: Expand Ecosystem Partnerships</li>
+    </ol>
+  </div>
+
   <script>
+    function setupXgrokPresale() {
+      console.log("Presale module initialized");
+    }
     setupXgrokPresale();
   </script>
 </body>
