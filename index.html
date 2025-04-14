@@ -2,259 +2,191 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>XGROK - Presale Landing</title>
-  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XGROK Presale</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      padding: 0;
       background: black;
-      color: white;
       overflow: hidden;
+      color: white;
     }
 
-    canvas {
+    canvas#stars {
       position: fixed;
       top: 0;
       left: 0;
       z-index: -1;
     }
 
-    .connect-wallet {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: gold;
-      color: black;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      box-shadow: 0 0 15px gold;
-      transition: 0.3s;
-    }
-    .connect-wallet:hover {
-      background: #ffd700;
+    .gold-border {
+      border: 6px solid;
+      border-image: linear-gradient(270deg, gold, orange, red, orange, gold) 1;
+      border-radius: 1rem;
+      animation: glowBorder 3s linear infinite;
     }
 
-    .panel {
-      position: absolute;
-      top: 100px;
-      right: 20px;
-      background: rgba(0, 0, 0, 0.6);
-      border: 3px solid gold;
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: 0 0 25px gold;
-      width: 320px;
-      animation: glow 2s infinite alternate;
-    }
-
-    @keyframes glow {
-      from {
-        box-shadow: 0 0 15px gold;
+    @keyframes glowBorder {
+      0% {
+        border-image: linear-gradient(0deg, gold, orange, red, orange, gold) 1;
       }
-      to {
-        box-shadow: 0 0 30px gold;
+      25% {
+        border-image: linear-gradient(90deg, red, gold, orange, gold, red) 1;
+      }
+      50% {
+        border-image: linear-gradient(180deg, orange, red, gold, red, orange) 1;
+      }
+      75% {
+        border-image: linear-gradient(270deg, gold, orange, red, orange, gold) 1;
+      }
+      100% {
+        border-image: linear-gradient(360deg, red, gold, orange, gold, red) 1;
       }
     }
 
-    .panel img.logo {
-      width: 80px;
-      margin-bottom: 10px;
-    }
-
-    .panel h2 {
-      margin-top: 0;
-      color: gold;
-    }
-
-    .countdown {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-
-    .bonus-text {
-      color: #ffd700;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    input[type="number"] {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: none;
-    }
-
-    .payment-buttons button {
-      width: 48%;
-      padding: 10px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin: 5px 1%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: gold;
-      color: black;
-      font-weight: bold;
-    }
-
-    .payment-buttons img {
-      width: 20px;
-      height: 20px;
-    }
-
-    .socials {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .socials a {
-      color: gold;
-      font-size: 1.5rem;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .socials a:hover {
-      color: white;
-    }
-
-    #status {
-      font-size: 0.9rem;
-      margin-top: 10px;
+    .glow-button:hover {
+      box-shadow: 0 0 10px gold, 0 0 20px orange, 0 0 30px red;
     }
   </style>
 </head>
 <body>
+  <canvas id="stars"></canvas>
 
-<canvas id="stars"></canvas>
-
-<button class="connect-wallet" onclick="connectWallet()">Connect MetaMask</button>
-
-<div class="panel">
-  <img src="https://i.ibb.co/VY6FfBf/xgrok-logo.png" alt="XGROK Logo" class="logo"/>
-  <h2>XGROK Presale</h2>
-  <div class="countdown" id="countdown"></div>
-  <div class="bonus-text">🔥 25% BONUS before presale starts!</div>
-  <input type="number" id="amount" placeholder="Enter amount" />
-  <div class="payment-buttons">
-    <button onclick="buyWithUSDT()">
-      <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT"/> USDT
-    </button>
-    <button onclick="buyWithBNB()">
-      <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" alt="BNB"/> BNB
+  <!-- Metamask Connect Button -->
+  <div class="p-4 flex justify-end">
+    <button id="connectBtn" class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-full">
+      Connect Wallet
     </button>
   </div>
-  <p id="status"></p>
-  <div class="socials">
-    <a href="https://t.me/XGROKKK" target="_blank">📢</a>
-    <a href="https://x.com/XGrokkk" target="_blank">𝕏</a>
-  </div>
-</div>
 
-<script>
-  // MetaMask Connect
-  async function connectWallet() {
-    if (typeof window.ethereum !== 'undefined') {
-      try {
-        await ethereum.request({ method: 'eth_requestAccounts' });
-        document.querySelector('.connect-wallet').innerText = "Connected";
-      } catch (err) {
-        document.getElementById('status').innerText = 'Connection rejected.';
+  <!-- Presale Panel -->
+  <div class="max-w-xl ml-auto mr-10 mt-4 p-6 gold-border bg-black bg-opacity-80">
+    <h1 class="text-3xl font-bold text-yellow-400 text-center mb-4">Lucky Early Bird Sale 🐣</h1>
+    <p class="text-center text-white mb-2">Price: <span class="text-green-400">0.000000000005 USDT</span></p>
+    <p class="text-center text-gray-400 mb-6">Presale launch price: 0.00000000003 USDT</p>
+
+    <div class="space-y-4">
+      <label class="block text-white">Payment method:</label>
+      <div class="flex justify-between space-x-2">
+        <button id="bnbBtn" class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded w-full glow-button" onclick="selectMethod('BNB')">BNB</button>
+        <button id="usdtBtn" class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded w-full glow-button" onclick="selectMethod('USDT')">USDT</button>
+        <button id="ethBtn" class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded w-full glow-button" onclick="selectMethod('ETH')">ETH</button>
+      </div>
+
+      <label class="block text-white">Investment amount (USD):</label>
+      <input id="amount" type="number" placeholder="10 - 10000" class="w-full p-2 rounded text-black" />
+
+      <button id="buyBtn" class="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
+        Buy Now
+      </button>
+    </div>
+  </div>
+
+  <script>
+    let web3;
+    let selectedMethod = "BNB";
+    const contractAddress = "0x19B86B4E6e0bBF652a2896014DB437c484dC9a9B";
+
+    function selectMethod(method) {
+      selectedMethod = method;
+      alert(`${method} selected`);
+    }
+
+    document.getElementById("connectBtn").onclick = async () => {
+      if (window.ethereum) {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        web3 = new Web3(window.ethereum);
+        alert("Wallet connected ✅");
+      } else {
+        alert("Metamask is not installed!");
       }
-    } else {
-      alert('Please install MetaMask!');
+    };
+
+    document.getElementById("buyBtn").onclick = async () => {
+      const amount = parseFloat(document.getElementById("amount").value);
+      if (!web3 || !amount || amount < 10 || amount > 10000) {
+        alert("Please enter a valid amount (between 10 - 10000 USD)");
+        return;
+      }
+
+      const accounts = await web3.eth.getAccounts();
+      const sender = accounts[0];
+
+      if (selectedMethod === "BNB") {
+        const bnbPrice = 600; // örnek olarak 1 BNB = 600 USD
+        const amountInBNB = amount / bnbPrice;
+
+        web3.eth.sendTransaction({
+          from: sender,
+          to: contractAddress,
+          value: web3.utils.toWei(amountInBNB.toString(), "ether")
+        })
+        .then(() => alert("BNB transaction successful ✅"))
+        .catch((err) => alert("Transaction failed: " + err.message));
+      } else {
+        alert(`${selectedMethod} support coming soon.`);
+      }
+    };
+
+    // Star background animation
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+    let width, height;
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
     }
-  }
 
-  // Buy Functions
-  const BONUS_PERCENT = 25;
-  function buyWithUSDT() {
-    const amount = document.getElementById("amount").value;
-    const total = amount * (1 + BONUS_PERCENT / 100);
-    document.getElementById("status").innerText = `✅ You'll receive ${total} XGROK (with bonus)!`;
-  }
-
-  function buyWithBNB() {
-    const amount = document.getElementById("amount").value;
-    const total = amount * (1 + BONUS_PERCENT / 100);
-    document.getElementById("status").innerText = `✅ You'll receive ${total} XGROK (with bonus)!`;
-  }
-
-  // Countdown Timer
-  const countdownEl = document.getElementById("countdown");
-  const endDate = new Date();
-  endDate.setDate(endDate.getDate() + 60);
-  function updateCountdown() {
-    const now = new Date();
-    const diff = endDate - now;
-    if (diff <= 0) {
-      countdownEl.innerText = "Presale Started!";
-      return;
+    function createStars(count) {
+      stars = [];
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: Math.random() * 1.5 + 0.5,
+          d: Math.random() * 0.5 + 0.2
+        });
+      }
     }
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-    countdownEl.innerText = `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s left`;
-  }
-  setInterval(updateCountdown, 1000);
 
-  // 3D Star Background
-  const canvas = document.getElementById('stars');
-  const ctx = canvas.getContext('2d');
-  let stars = [];
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    stars = [];
-    for (let i = 0; i < 150; i++) {
-      stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        z: Math.random() * canvas.width
-      });
-    }
-  }
-
-  function drawStars() {
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'white';
-    for (let i = 0; i < stars.length; i++) {
-      const star = stars[i];
-      star.z -= 1;
-      if (star.z <= 0) star.z = canvas.width;
-      const k = 128.0 / star.z;
-      const px = star.x * k + canvas.width / 2;
-      const py = star.y * k + canvas.height / 2;
-      if (px >= 0 && px < canvas.width && py >= 0 && py < canvas.height) {
-        const size = (1 - star.z / canvas.width) * 3;
+    function drawStars() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "white";
+      for (let star of stars) {
         ctx.beginPath();
-        ctx.arc(px, py, size, 0, Math.PI * 2);
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
         ctx.fill();
       }
     }
-    requestAnimationFrame(drawStars);
-  }
 
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-  drawStars();
-</script>
+    function animateStars() {
+      for (let star of stars) {
+        star.y += star.d;
+        if (star.y > height) {
+          star.y = 0;
+          star.x = Math.random() * width;
+        }
+      }
+      drawStars();
+      requestAnimationFrame(animateStars);
+    }
 
+    window.addEventListener("resize", () => {
+      resize();
+      createStars(200);
+    });
+
+    resize();
+    createStars(200);
+    animateStars();
+  </script>
 </body>
 </html>
+
