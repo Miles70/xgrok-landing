@@ -30,40 +30,100 @@
     }
 
     @keyframes glowBorder {
-      0% {
-        border-image: linear-gradient(0deg, gold, orange, red, orange, gold) 1;
-      }
-      25% {
-        border-image: linear-gradient(90deg, red, gold, orange, gold, red) 1;
-      }
-      50% {
-        border-image: linear-gradient(180deg, orange, red, gold, red, orange) 1;
-      }
-      75% {
-        border-image: linear-gradient(270deg, gold, orange, red, orange, gold) 1;
-      }
-      100% {
-        border-image: linear-gradient(360deg, red, gold, orange, gold, red) 1;
-      }
+      0% { border-image: linear-gradient(0deg, gold, orange, red, orange, gold) 1; }
+      25% { border-image: linear-gradient(90deg, red, gold, orange, gold, red) 1; }
+      50% { border-image: linear-gradient(180deg, orange, red, gold, red, orange) 1; }
+      75% { border-image: linear-gradient(270deg, gold, orange, red, orange, gold) 1; }
+      100% { border-image: linear-gradient(360deg, red, gold, orange, gold, red) 1; }
     }
 
     .glow-button:hover {
       box-shadow: 0 0 10px gold, 0 0 20px orange, 0 0 30px red;
+    }
+
+    .xgrok-logo-panel {
+      position: absolute;
+      top: 70px;
+      left: 25px;
+      width: 65px;
+      opacity: 0.45;
+      z-index: 10;
+      filter: drop-shadow(0 0 6px #22c55e);
+    }
+
+    .xgrok-logo-panel-right {
+      position: absolute;
+      top: 70px;
+      right: 25px;
+      width: 65px;
+      opacity: 0.45;
+      z-index: 10;
+      filter: drop-shadow(0 0 6px #22c55e);
+    }
+
+    @keyframes glowText {
+      0% { text-shadow: 0 0 5px #facc15, 0 0 10px #facc15; opacity: 0.7; }
+      50% { text-shadow: 0 0 25px #facc15, 0 0 40px #facc15; opacity: 1; }
+      100% { text-shadow: 0 0 5px #facc15, 0 0 10px #facc15; opacity: 0.7; }
+    }
+
+    .xgrok-text {
+      position: absolute;
+      top: 140px;
+      left: 30px;
+      font-size: 0.75rem;
+      color: #facc15;
+      opacity: 0.9;
+      z-index: 1;
+      animation: glowText 2.5s infinite ease-in-out;
+    }
+
+    .xgrok-text-right {
+      position: absolute;
+      top: 140px;
+      right: 30px;
+      font-size: 0.75rem;
+      color: #facc15;
+      opacity: 0.9;
+      z-index: 1;
+      animation: glowText 2.5s infinite ease-in-out;
+    }
+
+    .contract-address {
+      margin-top: 1rem;
+      padding: 0.5rem;
+      background-color: #1f2937;
+      border: 1px solid #facc15;
+      border-radius: 0.5rem;
+      word-break: break-word;
+      text-align: center;
+      font-size: 0.875rem;
+      color: #facc15;
+    }
+
+    .payment-indicator {
+      margin-top: 0.5rem;
+      text-align: center;
+      font-size: 0.875rem;
+      color: #22c55e;
     }
   </style>
 </head>
 <body>
   <canvas id="stars"></canvas>
 
-  <!-- Metamask Connect Button -->
   <div class="p-4 flex justify-end">
     <button id="connectBtn" class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-full">
       Connect Wallet
     </button>
   </div>
 
-  <!-- Presale Panel -->
-  <div class="max-w-xl ml-auto mr-10 mt-4 p-6 gold-border bg-black bg-opacity-80">
+  <div class="max-w-xl ml-auto mr-10 mt-4 p-6 gold-border bg-black bg-opacity-80 relative">
+    <img src="https://miles70.github.io/xgrok-landing/xgrok-logo.png" alt="XGROK Logo" class="xgrok-logo-panel">
+    <img src="https://miles70.github.io/xgrok-landing/xgrok-logo.png" alt="XGROK Logo" class="xgrok-logo-panel-right">
+    <div class="xgrok-text">XGrok</div>
+    <div class="xgrok-text-right">XGrok</div>
+
     <h1 class="text-3xl font-bold text-yellow-400 text-center mb-4">Lucky Early Bird Sale 🐣</h1>
     <p class="text-center text-white mb-2">Price: <span class="text-green-400">0.000000000005 USDT</span></p>
     <p class="text-center text-gray-400 mb-6">Presale launch price: 0.00000000003 USDT</p>
@@ -71,10 +131,12 @@
     <div class="space-y-4">
       <label class="block text-white">Payment method:</label>
       <div class="flex justify-between space-x-2">
-        <button id="bnbBtn" class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded w-full glow-button" onclick="selectMethod('BNB')">BNB</button>
-        <button id="usdtBtn" class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded w-full glow-button" onclick="selectMethod('USDT')">USDT</button>
-        <button id="ethBtn" class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded w-full glow-button" onclick="selectMethod('ETH')">ETH</button>
+        <button id="bnbBtn" class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded w-full glow-button transition duration-300 hover:brightness-125" onclick="selectMethod('BNB')">BNB</button>
+        <button id="usdtBtn" class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded w-full glow-button transition duration-300 hover:brightness-125" onclick="selectMethod('USDT')">USDT</button>
+        <button id="ethBtn" class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded w-full glow-button transition duration-300 hover:brightness-125" onclick="selectMethod('ETH')">ETH</button>
       </div>
+
+      <div id="selectedMethodIndicator" class="payment-indicator">Selected: BNB</div>
 
       <label class="block text-white">Investment amount (USD):</label>
       <input id="amount" type="number" placeholder="10 - 10000" class="w-full p-2 rounded text-black" />
@@ -82,111 +144,18 @@
       <button id="buyBtn" class="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
         Buy Now
       </button>
+
+      <div class="contract-address">
+        Presale Contract Address:<br>
+        <span id="contractCopy" class="cursor-pointer underline hover:text-white">0x19B86B4E6e0bBF652a2896014DB437c484dC9a9B</span>
+        <div id="copyNotice" class="text-xs text-green-400 mt-1 hidden">Copied!</div>
+      </div>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/gh/miles70/xgrok-landing/xgrok-payment-module.js"></script>
   <script>
-    let web3;
-    let selectedMethod = "BNB";
-    const contractAddress = "0x19B86B4E6e0bBF652a2896014DB437c484dC9a9B";
-
-    function selectMethod(method) {
-      selectedMethod = method;
-      alert(`${method} selected`);
-    }
-
-    document.getElementById("connectBtn").onclick = async () => {
-      if (window.ethereum) {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        web3 = new Web3(window.ethereum);
-        alert("Wallet connected ✅");
-      } else {
-        alert("Metamask is not installed!");
-      }
-    };
-
-    document.getElementById("buyBtn").onclick = async () => {
-      const amount = parseFloat(document.getElementById("amount").value);
-      if (!web3 || !amount || amount < 10 || amount > 10000) {
-        alert("Please enter a valid amount (between 10 - 10000 USD)");
-        return;
-      }
-
-      const accounts = await web3.eth.getAccounts();
-      const sender = accounts[0];
-
-      if (selectedMethod === "BNB") {
-        const bnbPrice = 600; // örnek olarak 1 BNB = 600 USD
-        const amountInBNB = amount / bnbPrice;
-
-        web3.eth.sendTransaction({
-          from: sender,
-          to: contractAddress,
-          value: web3.utils.toWei(amountInBNB.toString(), "ether")
-        })
-        .then(() => alert("BNB transaction successful ✅"))
-        .catch((err) => alert("Transaction failed: " + err.message));
-      } else {
-        alert(`${selectedMethod} support coming soon.`);
-      }
-    };
-
-    // Star background animation
-    const canvas = document.getElementById("stars");
-    const ctx = canvas.getContext("2d");
-    let stars = [];
-    let width, height;
-
-    function resize() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-    }
-
-    function createStars(count) {
-      stars = [];
-      for (let i = 0; i < count; i++) {
-        stars.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          r: Math.random() * 1.5 + 0.5,
-          d: Math.random() * 0.5 + 0.2
-        });
-      }
-    }
-
-    function drawStars() {
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = "white";
-      for (let star of stars) {
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    function animateStars() {
-      for (let star of stars) {
-        star.y += star.d;
-        if (star.y > height) {
-          star.y = 0;
-          star.x = Math.random() * width;
-        }
-      }
-      drawStars();
-      requestAnimationFrame(animateStars);
-    }
-
-    window.addEventListener("resize", () => {
-      resize();
-      createStars(200);
-    });
-
-    resize();
-    createStars(200);
-    animateStars();
+    setupXgrokPresale();
   </script>
 </body>
 </html>
-
