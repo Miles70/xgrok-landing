@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XGROK Intro</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      overflow: hidden;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1, h2, .xgrok, p {
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 1.5s ease;
+    }
+    h1.show, h2.show, .xgrok.show, p.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .xgrok {
+      font-size: 3rem;
+      color: gold;
+      font-weight: bold;
+      text-shadow: 0 0 20px gold;
+      margin-top: 20px;
+    }
+    p {
+      font-style: italic;
+      color: gold;
+      margin-top: 10px;
+    }
+    .enter-btn {
+      opacity: 0;
+      margin-top: 40px;
+      padding: 10px 20px;
+      border: 2px solid gold;
+      border-radius: 20px;
+      background: transparent;
+      color: gold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .enter-btn:hover {
+      background: gold;
+      color: black;
+    }
+    .enter-btn.show {
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <div class="content">
+    <h1 id="line1">You look lonely...</h1>
+    <h2 id="line2">I can fix that.</h2>
+    <div class="xgrok" id="xgrok">XGROK</div>
+    <p id="motto">Believe in the unbelievable</p>
+    <button id="enter" class="enter-btn" onclick="window.location.href='presale.html'">Enter the Presale</button>
+  </div>
+
+  <audio autoplay loop>
+    <source src="softcore-slowed.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+    let stars = Array.from({ length: 100 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: Math.random() * 1.5,
+      s: Math.random() * 0.5 + 0.2
+    }));
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "white";
+      for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fill();
+        star.y += star.s;
+        if (star.y > height) star.y = 0;
+      }
+    };
+    const animate = () => {
+      draw();
+      requestAnimationFrame(animate);
+    };
+    animate();
+    window.addEventListener("resize", () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    // Animasyon zamanlaması
+    setTimeout(() => document.getElementById("line1").classList.add("show"), 1000);
+    setTimeout(() => document.getElementById("line2").classList.add("show"), 4000);
+    setTimeout(() => document.getElementById("xgrok").classList.add("show"), 6000);
+    setTimeout(() => document.getElementById("motto").classList.add("show"), 7500);
+    setTimeout(() => document.getElementById("enter").classList.add("show"), 9000);
+  </script>
+</body>
+</html>
